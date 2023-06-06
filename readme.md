@@ -8,11 +8,18 @@ Furthermore, some automated tests have been added, but some these will fail as t
 
 
 Install neccessary dependencies by running
-
+```
 pip install -r requirements.txt
+```
 
-Run with "python main.py"
+Run with 
+```
+python main.py
+```
 
 Swagger will be available at http://127.0.0.1:5000
 
-Run unittests with "python -m unittest tests/apis/test_property.py"
+Run unittests with 
+```
+python -m unittest tests/apis/test_property.py
+```
