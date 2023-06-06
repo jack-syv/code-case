@@ -20,7 +20,7 @@ class Property(Resource):
 
     """Endpoints for creating, updating and deleting a property with a specific property id."""
     
-    @api.doc(responses={200: "Ok", 400: "Invalid Argument", 500: "Internal error"}, description="Creates a Property")
+    @api.doc(responses={200: "Ok", 400: "Bad Request", 500: "Internal error"}, description="Create a Property")
     @api.expect(property_model)
     def post(self, property_id):
         property_data = request.json
@@ -33,7 +33,7 @@ class Property(Resource):
             return "Property with property id: " + property_id + " succesfully created."
         return abort(400)
     
-    @api.doc(responses={200: "Ok", 400: "Invalid Argument", 500: "Internal error"}, description="Updates a Property")
+    @api.doc(responses={200: "Ok", 400: "Bad Request", 500: "Internal error"}, description="Update a Property")
     @api.expect(property_model)
     def put(self, property_id): 
         property_data = request.json
@@ -43,7 +43,7 @@ class Property(Resource):
         else:
             return property_bad_request(property_id)
     
-    @api.doc(responses={200: "Ok", 400: "Invalid Argument", 500: "Internal error"}, description="Delete a Property")
+    @api.doc(responses={200: "Ok", 400: "Bad Request", 500: "Internal error"}, description="Delete a Property")
     def delete(self, property_id):
         if property_repository.delete_property(property_id):
             return "Property with property_id " + property_id + " succesfully deleted."
