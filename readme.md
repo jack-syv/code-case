@@ -4,7 +4,7 @@ The property_id should ideally be validated against a central registry, ensuring
 
 In addition, some handling of lower case / uppercase strings may be necessary for unit_type and features. In addition to validation of the address, (e.g. it exists in the country)
 
-Furthermore, some automated tests have been added, but these will fail as the dummy repository doesn't update any list or database.
+Furthermore, some automated tests have been added, but some these will fail as the dummy repository doesn't update any list or database.
 
 
 Install neccessary dependencies by running
