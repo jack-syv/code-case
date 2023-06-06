@@ -36,7 +36,7 @@ class PropertyApiTests(unittest.TestCase):
 
         response = self.client.post(f'/property/{property_id}', json=property_data)
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertEqual(response.json, f'{property_id} created')
+        self.assertEqual(response.json, 'Property with property id: ' + property_id + ' succesfully created.')
 
     def test_create_existing_property(self):
         property_id = '12345'

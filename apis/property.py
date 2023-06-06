@@ -18,9 +18,9 @@ property_model = api.model('Property', {
 @api.doc(params={'property_id': 'The specific id of the property that is requested'})
 class Property(Resource):
 
-    """Endpoints for creating, updating and deleting a property with a specific property_id"""
+    """Endpoints for creating, updating and deleting a property with a specific property id."""
     
-    @api.doc(responses={200: "Ok", 400: "Invalid Argument", 500: "Some internal error"}, description="Creates a Property")
+    @api.doc(responses={200: "Ok", 400: "Invalid Argument", 500: "Internal error"}, description="Creates a Property")
     @api.expect(property_model)
     def post(self, property_id):
         property_data = request.json
@@ -30,27 +30,27 @@ class Property(Resource):
             return make_response({'message': error_msg}, 400)
         
         if property_repository.create_property(property_id, property_data):
-            return property_id + " created"
+            return "Property with property id: " + property_id + " succesfully created."
         return abort(400)
     
-    @api.doc(responses={200: "Ok", 400: "Invalid Argument", 500: "Some internal error"}, description="Updates a Property")
+    @api.doc(responses={200: "Ok", 400: "Invalid Argument", 500: "Internal error"}, description="Updates a Property")
     @api.expect(property_model)
     def put(self, property_id): 
         property_data = request.json
         validate_property(property_data)
-        if (property_repository.update_property(property_id, property_data)):
-            return property_id + " updated"
+        if property_repository.update_property(property_id, property_data):
+            return "Property with property_id " + property_id + " successfully updated."
         else:
             return property_bad_request(property_id)
     
-    @api.doc(responses={200: "Ok", 400: "Invalid Argument", 500: "Some internal error"}, description="Delete a Property")
+    @api.doc(responses={200: "Ok", 400: "Invalid Argument", 500: "Internal error"}, description="Delete a Property")
     def delete(self, property_id):
         if property_repository.delete_property(property_id):
-            return property_id + " deleted"
+            return "Property with property_id " + property_id + " succesfully deleted."
         else:
             return property_bad_request(property_id)
 
     
 def property_bad_request(property_id):
-    error_msg = "Property with " + property_id + " does not exist"
-    return make_response({"message": error_msg}, 400)
+    error_msg = "Property with property_id " + property_id + " does not exist."
+    return make_response({'message': error_msg}, 400)

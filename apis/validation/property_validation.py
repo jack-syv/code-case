@@ -1,6 +1,7 @@
 from flask import abort
 from ..utils.types import valid_unit_types, valid_features
 
+# Validate property
 def validate_property(property):
     validate_unit_type(property["unit_type"])
     validate_features(property["features"])
@@ -12,13 +13,14 @@ def validate_unit_type(unit_type):
     if unit_type not in valid_unit_types:
         abort(400, f"Invalid unit_type. Allowed values: {', '.join(valid_unit_types)}")
 
-# Validation for unit_type
+# Validation for features
 def validate_features(features):
     for feature in features:
         feature = feature.lower()
         if feature not in valid_features:
             abort(400, f"Invalid feature: {feature}. Allowed features: {', '.join(valid_features)}")
 
+# Validation for number_of_floors
 def validate_non_negative(number_of_floors):
     if number_of_floors < 0:
         abort(400, "Number of floors must be 0 or above.")
